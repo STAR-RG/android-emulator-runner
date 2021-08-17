@@ -1,5 +1,5 @@
-name: 'Android Emulator Runner'
-description: 'Installs, configures and starts an Android Emulator directly on macOS virtual machines.'
+name: 'Shaker Action for Android'
+description: 'Starts an Android Emulator directly on macOS virtual machines with Shaker'
 author: 'Reactive Circus'
 branding:
   icon: 'smartphone'
@@ -51,6 +51,13 @@ inputs:
     description: 'version of CMake to install - e.g. 3.10.2.4988404'
   script:
     description: 'custom script to run - e.g. `./gradlew connectedCheck`'
+    required: true
+# SHAKER
+  adb-run-tests:
+    description: 'abd shell script to run the AndroidTests in emulator - e.g. `adb shell am instrument -w -r    -e package com.example.android.testing.espresso.fragmentscenario -e debug false com.example.android.testing.espresso.FragmentScenarioSample.test/androidx.test.runner.AndroidJUnitRunner`'
+    required: true
+  install-command:
+    description: 'script to INSTALL the app and INSTALL the tests - e.g `/gradlew installDebug installDebugAndroidTest`'
     required: true
 runs:
   using: 'node12'

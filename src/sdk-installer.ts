@@ -19,6 +19,10 @@ export async function installAndroidSdk(apiLevel: number, target: string, arch: 
     await exec.exec(`sh -c \\"sudo chown $USER:$USER ${process.env.ANDROID_SDK_ROOT} -R`);
   }
 
+  //SHAKER
+  console.log('Installing stress-ng');
+  await exec.exec('sh', ['-c', 'brew install stress-ng'])
+
   const cmdlineToolsPath = `${process.env.ANDROID_SDK_ROOT}/cmdline-tools`;
   if (!fs.existsSync(cmdlineToolsPath)) {
     console.log('Installing new cmdline-tools.');

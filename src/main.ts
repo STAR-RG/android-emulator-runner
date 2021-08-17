@@ -149,6 +149,30 @@ async function run() {
       disableLinuxHardwareAcceleration
     );
 
+    //SHAKER
+    //pelo que percebi, no momento da execucao esse codigo fica no seguinte caminho no container:
+    //"/System/Volumes/Data/Users/runner/work/_actions/STAR-RG/android-emulator-runner/v.x.x/src/"
+    //Rodando o comando para installar o app e os tests, adbRunTestsComand
+    const installComand = core.getInput('install-command', { required: true });
+    console.log(`Installing App and tests\nInstall Command Comand: ${installComand}`);
+    await exec.exec('sh', ['-c', installComand]);
+    console.log('Terminou de instalar os apps e os tests')
+
+    // comando usado para rodar os testes: 
+    const adbRunTestsComand = core.getInput('adb-run-tests', { required: true });
+    console.log(`adb Run Tests Comand: ${adbRunTestsComand}`);
+
+
+    //TODO: dentro do rodar as 4 configuração de shaker por 3 vezes 
+    //(por enquanto pode fixar esse valor e depois a gente coloca como input)
+
+    /*try {
+    } catch (error) {
+      console.error("ERROR running SHAKER")
+      core.setFailed(error.message);
+    }
+    */
+
     // execute the custom script
     try {
       // move to custom working directory if set
